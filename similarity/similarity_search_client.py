@@ -71,7 +71,7 @@ parser = argparse.ArgumentParser(
     formatter_class=argparse.ArgumentDefaultsHelpFormatter,
 )
 parser.add_argument("-a", "--add", help="description to add")
-parser.add_argument("-q", "--query", help="get id for query search")
+parser.add_argument("-q", "--query", help="get id for query search", nargs="+")
 parser.add_argument(
     "-s",
     "--search_id",
