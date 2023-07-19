@@ -22,15 +22,15 @@ Start client without additional parameters to fill db and make tests
 Also similarity_search_client.py can be executed with additional parameters
 
 -a , --add to add new description to database
-
--q , --query to create new search and retrieve search id
-
--s , --search_id to get results by search id
-
 > python similarity_search_client.py -a test
 
+-q , --query to create new search and retrieve search id
 > python similarity_search_client.py -q test
 
+-s , --search_id to get results by search id
 > python similarity_search_client.py {search_id}
+
+
+
 
 
