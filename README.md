@@ -10,6 +10,7 @@ go to directory
 
 run Docker-Compose to start service and it's database.
 >docker-compose build
+
 >docker-compose up
 
 Than, after all containers is up.
@@ -24,7 +25,9 @@ Also similarity_search_client.py can be executed with additional parameters
 -s , --search_id to get results by search id
 
 > python similarity_search_client.py -a test
+
 > python similarity_search_client.py -q test
+
 > python similarity_search_client.py {search_id}
 
 
