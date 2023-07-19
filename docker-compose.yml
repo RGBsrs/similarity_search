@@ -1,0 +1,23 @@
+version: '3'
+services:
+  similarity:
+    restart: always
+    build: .
+    ports:
+      - 50051:50051
+    depends_on:
+      - database
+
+  database:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: similarity_search_db
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
