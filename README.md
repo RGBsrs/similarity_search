@@ -5,6 +5,11 @@ To install this project from the repository:
 
 >git clone https://github.com/RGBsrs/similarity_search.git
 
+Install packages:
+> pip install grpcio
+
+> pip install grpc-tools
+
 go to directory
 > cd similarity_search
 
