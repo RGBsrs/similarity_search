@@ -38,7 +38,10 @@ Also similarity_search_client.py can be executed with additional parameters
 
 
 -s , --search_id to get results by search id
-> python similarity_search_client.py {search_id}
+> python similarity_search_client.py -s {search_id}
+
+-t , --test to test 
+> python similarity_search_client.py -t true
 
 
 

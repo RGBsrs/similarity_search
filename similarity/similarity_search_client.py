@@ -35,24 +35,24 @@ def get_search_result(
 def run(config):
     with grpc.insecure_channel("localhost:50051") as channel:
         stub = similarity_search_pb2_grpc.SimilaritySearchServiceStub(channel)
+        if config["test"]:
+            description = "I enjoy coding"
+            response = add_item(stub, description)
+            assert type(response) == similarity_search_pb2.AddItemResponse
+            assert response.status == 201
+            assert response.message == "Created"
 
-        description = "I enjoy coding"
-        response = add_item(stub, description)
-        assert type(response) == similarity_search_pb2.AddItemResponse
-        assert response.status == 201
-        assert response.message == "Created"
+            description = "I'm not enjoy coding"
+            response = add_item(stub, description)
 
-        description = "I'm not enjoy coding"
-        response = add_item(stub, description)
+            response = search_items(stub, "enjoy")
+            search_id = response.search_id
+            assert type(response) == similarity_search_pb2.SearchItemsResponse
 
-        response = search_items(stub, "enjoy")
-        search_id = response.search_id
-        assert type(response) == similarity_search_pb2.SearchItemsResponse
-
-        response = get_search_result(stub, search_id)
-        assert type(response) == similarity_search_pb2.GetSearchResultsResponse
-        assert len(response.results) >= 1
-        assert response.results[0].description == "I enjoy coding"
+            response = get_search_result(stub, search_id)
+            assert type(response) == similarity_search_pb2.GetSearchResultsResponse
+            assert len(response.results) >= 1
+            assert response.results[0].description == "I enjoy coding"
 
         if config["add"] is not None:
             add_item(stub, config["add"])
@@ -76,6 +76,12 @@ parser.add_argument(
     "-s",
     "--search_id",
     help="get results for search_id",
+)
+parser.add_argument(
+    "-t",
+    "--test",
+    help="get results for search_id",
+    default=False,
 )
 args = parser.parse_args()
 config = vars(args)
